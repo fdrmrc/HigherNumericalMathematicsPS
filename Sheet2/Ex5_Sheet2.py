@@ -82,11 +82,11 @@ def LW(nx,dt,tf):
         c=dt/dx
         un=u.copy()
         utemp0=un[0]-(c/2)*(un[1]-un[nx-1])+(c**2)/2*(un[1]-2*un[0]+un[nx-1])
-        utemp=un[nx-1]-(c/2)*(un[0]-un[nx-2])+(c**2)/2*(un[0]-2*un[nx-1]+un[nx-2])
-        for i in range(1,nx-1): #1,...,nx-2
+       # utemp=un[nx-1]-(c/2)*(un[0]-un[nx-2])+(c**2)/2*(un[0]-2*un[nx-1]+un[nx-2])
+        for i in range(1,nx): #1,...,nx-1
             u[i]=un[i]-(c/2)*(un[i+1]-un[i-1])+(c**2)/2*(un[i+1]-2*un[i]+un[i-1])            
             u[0]=utemp0
-            u[nx-1]=utemp
+            #u[nx-1]=utemp
             u[nx]=u[0]
         if(t+dt>tf):
             print('dt resized since excedeed final time ')
