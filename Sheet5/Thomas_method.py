@@ -1,6 +1,39 @@
 import numpy as np
 
 
+
+def thomas_symmetric(a,b,f):
+    #a = diagonal
+    #b = super/sub diagonal (matrix is symmetric)
+    
+    N = len(f)  #f_0,...f_n-1
+    c= np.zeros(N)
+    c[0] = a[0]
+    for i in range(1,N):#da 1 a N-1
+        c[i] = a[i] - (b[i-1]**2)/c[i-1]
+    
+    g = np.zeros(N)
+    g[0] = f[0]
+    for j in range(1,N):
+        g[j] = f[j] - (b[j-1]/c[j-1])*g[j-1]
+    
+    u = np.zeros(N)
+    u[N-1] = g[N-1]/c[N-1]
+    for k in range(N-2,-1,-1):
+        u[k] = (g[k]-b[k]*u[k+1])/c[k]
+
+    return u
+
+
+
+
+
+
+
+
+
+
+
 def modthomas(a,b,c,f):
     #Thomas method, modified version
     #a=diagonal, b=subdiagonal, c=superdiagonal
